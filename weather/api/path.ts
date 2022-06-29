@@ -1,0 +1,1 @@
+export const WEATHER_FORECAST_THREE = '/v1/rest/datastore/F-C0032-001';
