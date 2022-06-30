@@ -1,5 +1,6 @@
 import { React, ReactDOMServer } from "../dep.ts";
 import { WeatherAPI } from "../api/api.ts";
+import TableComponent from "../components/table/Table.tsx";
 
 // const { useState, useEffect } = React;
 
@@ -8,48 +9,46 @@ export const App: React.FC<any> = (props: any) => {
 
   const title = <h1>{records?.datasetDescription}</h1>;
   const counties = records?.location;
-  // const weather = records.weatherElemen;
+
+  const formatData = (data: any[]) => {
+    const flatObj = ({
+      startTime,
+      endTime,
+      parameter: { parameterName, parameterValue },
+    }) => ({ startTime, endTime, parameterName, parameterValue });
+
+    const flattedData = data.reduce((previousValue: any[], info) => {
+      return [...previousValue, flatObj(info)];
+    }, []);
+
+    const tableHead = Object.keys(flattedData[0]);
+    const tableBody = flattedData.map((item) => Object.values(item));
+
+    return {
+      tableHead,
+      tableBody,
+    };
+  };
+  // [{"startTime":"2022-06-30 18:00:00","endTime":"2022-07-01 06:00:00","parameter":{"parameterName":"多雲時晴","parameterValue":"3"}},{"startTime":"2022-07-01 06:00:00","endTime":"2022-07-01 18:00:00","parameter":{"parameterName":"多雲短暫陣雨或雷雨","parameterValue":"15"}},{"startTime":"2022-07-01 18:00:00","endTime":"2022-07-02 06:00:00","parameter":{"parameterName":"陰時多雲短暫陣雨或雷雨","parameterValue":"17"}}]
 
   const list = (counties: any) =>
-    counties.map((county: any) => (
-      <li>
+    counties.map((county: any, countyIdx: string) => (
+      <li key={countyIdx}>
         <p>{county.locationName}</p>
-        {county.weatherElement.map((info: any) => (
-          <ul>
+        {county.weatherElement.map((info: any, infoIdx: string) => (
+          <ul key={infoIdx}>
             <li>
               <p>{info.elementName}</p>
-              <p>{JSON.stringify(info.time)}</p>
+              <TableComponent source={formatData(info.time)}></TableComponent>
             </li>
           </ul>
         ))}
       </li>
     ));
-  console.log(props?.weather?.records?.locationName);
-  // const listElement = records.map(
-  //   (record: { locationName: string; weatherElement: any[] }) => {
-  //     return `
-  //       <li>
-  //       <p>${record.locationName}</p>
-  //       <p>${JSON.stringify(record.weatherElement)}</p>
-  //       </li>
-  //     `;
-  //   }
-  // );
-  // console.log(listElement);
-  // return listElement.join();
-  // React.useEffect(() => {
-  //   console.log(true)
-  //   const weatherAPI = new WeatherAPI();
-  //   const { records } = weatherAPI.getTodayWeather() as any;
-  //   console.log(records);
-  // })
 
-  // const location = records.location;
-  // const listElem = location.map((item: any) => {
-  //   return (<li>
-  //     { item }
-  //   </li>)
-  // })
+  React.useEffect(() => {
+    console.log("useEffect");
+  });
 
   return (
     <>
