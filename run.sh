@@ -1,1 +1,1 @@
-deno run --allow-net --watch main.tsx
+deno run --allow-net --allow-env --watch main.tsx
