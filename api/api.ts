@@ -1,5 +1,5 @@
-import { WEATHER_FORECAST_THREE } from './path.ts';
-import { GET } from './decorator.ts';
+import { WEATHER_FORECAST_THREE } from './common/path.ts';
+import { weatherGET } from './utils/decorator.ts';
 
 export class WeatherAPI {
 
@@ -7,6 +7,6 @@ export class WeatherAPI {
 
     }
 
-    @GET(WEATHER_FORECAST_THREE)
-    async getTodayWeather(): Promise<void> {}
+    @weatherGET(WEATHER_FORECAST_THREE)
+    async getTodayWeather(): Promise<any> {}
 }

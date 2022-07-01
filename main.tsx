@@ -11,7 +11,6 @@ const router = new Router();
 router.get("/", async ({ response }) => {
   const weatherAPI = new WeatherAPI();
   const todayWeather = await weatherAPI.getTodayWeather();
-  // console.log(todayWeather);
 
   response.type = "text/html";
   response.body = Index(
