@@ -1,16 +1,17 @@
 import { Application, Router } from "https://deno.land/x/oak@v10.6.0/mod.ts";
 import { PORT } from "./env/index.ts";
-import { WeatherAPI } from "./api/api.ts";
+import { WeatherAPI, ServerAPI } from "./api/api.ts";
 import { appHtml } from "./pages/index.tsx";
 import { React, ReactDOMServer } from "./dep.ts";
 import { App, Index } from "./pages/index.tsx";
+import { WEATHER_TODAY } from "./api/common/path.ts";
 
 const app = new Application();
 const router = new Router();
 
 router.get("/", async ({ response }) => {
-  const weatherAPI = new WeatherAPI();
-  const todayWeather = await weatherAPI.getTodayWeather();
+  const serverAPI = new ServerAPI();
+  const todayWeather = await serverAPI.getTodayWeather();
 
   response.type = "text/html";
   response.body = Index(
@@ -18,7 +19,7 @@ router.get("/", async ({ response }) => {
   );
 });
 
-router.get("/weather/today", async ({ response }) => {
+router.get(WEATHER_TODAY, async ({ response }) => {
   try {
     const weatherAPI = new WeatherAPI();
     response.body = await weatherAPI.getTodayWeather();
