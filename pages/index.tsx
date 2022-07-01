@@ -29,7 +29,6 @@ export const App: React.FC<any> = (props: any) => {
       tableBody,
     };
   };
-  // [{"startTime":"2022-06-30 18:00:00","endTime":"2022-07-01 06:00:00","parameter":{"parameterName":"多雲時晴","parameterValue":"3"}},{"startTime":"2022-07-01 06:00:00","endTime":"2022-07-01 18:00:00","parameter":{"parameterName":"多雲短暫陣雨或雷雨","parameterValue":"15"}},{"startTime":"2022-07-01 18:00:00","endTime":"2022-07-02 06:00:00","parameter":{"parameterName":"陰時多雲短暫陣雨或雷雨","parameterValue":"17"}}]
 
   const list = (counties: any) =>
     counties.map((county: any, countyIdx: string) => (

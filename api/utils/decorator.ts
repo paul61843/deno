@@ -6,7 +6,7 @@ const weatherAPI = new BaseAPI(WEATHER_BASE)
 export const weatherGET = (apiPath: string) => {
     return (target: any, propertyKey: string, descriptor: PropertyDescriptor) => {
         descriptor.value = async () =>{
-            const response = await weatherAPI.GET(apiPath, `/Authorization=${AUTH_CODE}`);
+            const response = await weatherAPI.GET(apiPath, `/?Authorization=${AUTH_CODE}`);
             return response.json();
         } 
     };

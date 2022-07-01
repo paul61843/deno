@@ -1,5 +1,5 @@
 import { WEATHER_BASE, AUTH_CODE } from '../../env/index.ts';
-import { baseHeaders, POSTConfig } from './config.ts';
+import { GETConfig, POSTConfig } from './config.ts';
 
 export class BaseAPI {
 
@@ -12,9 +12,9 @@ export class BaseAPI {
     async GET(path: string, queryString: string): Promise<any> {
         const weatherUrl = `${this.basePath}/${path}${queryString}`;
         const config = {
-            ...POSTConfig,
+            ...GETConfig,
         };
-    
+        
         return await fetch(weatherUrl, config); 
     }
 
