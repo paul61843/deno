@@ -2,15 +2,23 @@ import { React, ReactDOMServer } from "../dep.ts";
 import { WeatherAPI } from "../api/api.ts";
 import TableComponent from "../components/table/Table.tsx";
 
-// const { useState, useEffect } = React;
+const { useState, useEffect } = React;
 
-export const App: React.FC<any> = (props: any) => {
-  const records = props?.weather?.records;
+export class App extends React.Component {
 
-  const title = <h1>{records?.datasetDescription}</h1>;
-  const counties = records?.location;
+  title: string;
+  records: any[];
+  counties: any[];
 
-  const formatData = (data: any[]) => {
+  constructor(props: any) {
+    super(props);
+    const weather = props.weather;
+    this.records = weather?.records;
+    this.counties = this.records?.location;    
+    this.title = this.records?.datasetDescription;
+  }
+
+  formatData(data: any[]) {
     const flatObj = ({
       startTime,
       endTime,
@@ -30,32 +38,31 @@ export const App: React.FC<any> = (props: any) => {
     };
   };
 
-  const list = (counties: any) =>
-    counties.map((county: any, countyIdx: string) => (
-      <li key={countyIdx}>
+    list(counties: any) {
+      return counties.map((county: any, countyIdx: string) => (
+        <li key={countyIdx}>
         <p>{county.locationName}</p>
         {county.weatherElement.map((info: any, infoIdx: string) => (
           <ul key={infoIdx}>
             <li>
               <p>{info.elementName}</p>
-              <TableComponent source={formatData(info.time)}></TableComponent>
+              <TableComponent source={this.formatData(info.time)}></TableComponent>
             </li>
           </ul>
         ))}
-      </li>
-    ));
+        </li>
+      ));
+    }
 
-  React.useEffect(() => {
-    console.log("useEffect");
-  });
-
-  return (
-    <>
-      <h1>{title}</h1>
-
-      {records && <ul>{list(counties)}</ul>}
+  render() {
+    return (
+     <>
+      <h1>{this.title}</h1>
+      <ul>{this.list(this.counties)}</ul>
     </>
-  );
+    );
+  }
+
 };
 
 export const Index = (appHtml: string) => {
@@ -75,6 +82,4 @@ export const Index = (appHtml: string) => {
   `;
 };
 
-export const appHtml = Index(
-  ReactDOMServer.renderToString(<App name={"app name"} />)
-);
+

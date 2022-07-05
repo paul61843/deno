@@ -1,7 +1,6 @@
 import { Application, Router } from "https://deno.land/x/oak@v10.6.0/mod.ts";
 import { PORT } from "./env/index.ts";
 import { WeatherAPI, ServerAPI } from "./api/api.ts";
-import { appHtml } from "./pages/index.tsx";
 import { React, ReactDOMServer } from "./dep.ts";
 import { App, Index } from "./pages/index.tsx";
 import { WEATHER_TODAY, WEATHER_TODAY_Search } from "./api/common/path.ts";
