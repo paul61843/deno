@@ -2,26 +2,69 @@ import { Application, Router } from "https://deno.land/x/oak@v10.6.0/mod.ts";
 import { PORT } from "./env/index.ts";
 import { WeatherAPI, ServerAPI } from "./api/api.ts";
 import { React, ReactDOMServer } from "./dep.ts";
-import { App, Index } from "./pages/index.tsx";
+import { App, Index, WeatherTemplate } from "./pages/index.tsx";
 import { WEATHER_TODAY, WEATHER_TODAY_Search } from "./api/common/path.ts";
 
 const app = new Application();
 const router = new Router();
 
-router.get("/", async ({ response }) => {
-  const serverAPI = new ServerAPI();
-  const todayWeather = await serverAPI.getTodayWeather();
+const weatherAPI = new WeatherAPI();
+const serverAPI = new ServerAPI();
 
+router.get("/", async ({ response }) => {
+  const formatedWeather = await serverAPI.getfomatedTodayWeather();
   response.type = "text/html";
-  response.body = Index(
-    ReactDOMServer.renderToString(<App weather={todayWeather} />)
-  );
+  response.body = Index(ReactDOMServer.renderToString(<WeatherTemplate weather={formatedWeather} />));
 });
 
 router.get(WEATHER_TODAY, async ({ response }) => {
   try {
     const weatherAPI = new WeatherAPI();
     response.body = await weatherAPI.getTodayWeather();
+    response.status = 200;
+  } catch (error) {
+    response.status = 404;
+    response.body = {
+      success: false,
+      message: "No Found",
+    };
+    console.warn(error);
+  }
+});
+
+router.get('/weather/today/formated', async ({ response }) => {
+  try {
+    const weatherInfo = await weatherAPI.getTodayWeather();
+    const formatData = weatherInfo?.records?.location
+      .reduce((previousValue: any[], { locationName, weatherElement }) => {
+        const weatherElementLen = weatherElement.length;
+        const { time } = weatherElement[0];
+        const timeLen = time.length;
+
+        let localationWeatherElement = [];
+        for(let i=0; i<timeLen; i++) {
+
+          let parameterObj = {};
+          for(let j=0; j<weatherElementLen; j++) {
+            const { elementName, time } = weatherElement[j];
+            const { startTime, endTime, parameter } = time[i];
+            const { parameterName, parameterValue, parameterUnit } = parameter;
+
+            parameterObj = {
+              ...parameterObj, 
+              startTime, 
+              endTime, 
+              [`${elementName}Name`]: parameterName,
+              [`${elementName}Value`]: parameterValue,
+              [`${elementName}Unit`]: parameterUnit,
+            };
+          }
+          localationWeatherElement.push(parameterObj);
+        }
+        return [...previousValue, { locationName, weatherElement: localationWeatherElement }];
+        
+      }, [])
+    response.body = formatData;
     response.status = 200;
   } catch (error) {
     response.status = 404;
