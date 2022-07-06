@@ -128,6 +128,7 @@ export class WeatherTemplate extends React.Component {
                   <p style={{ color: 'black', fontWeight: 'bold' }}>{ weatherInfo.MaxTName + weatherInfo.MaxTUnit } / { weatherInfo.MinTName + weatherInfo.MinTUnit }</p>
                   <p>{ this.formatDate(weatherInfo.startTime).date }</p>
                   <p>{ this.formatDate(weatherInfo.startTime).time }</p>
+                  <p>降雨 { weatherInfo.PoPName } %</p>
                 </section>
               ))}
             </main>
