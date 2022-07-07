@@ -1,9 +1,11 @@
 import { Application, Router } from "https://deno.land/x/oak@v10.6.0/mod.ts";
-import { PORT } from "./env/index.ts";
+import { PORT, SAVE_FILE_PATH } from "./env/index.ts";
 import { WeatherAPI, ServerAPI } from "./api/api.ts";
 import { React, ReactDOMServer } from "./dep.ts";
 import { App, Index, WeatherTemplate } from "./pages/index.tsx";
 import { WEATHER_TODAY, WEATHER_TODAY_Search } from "./api/common/path.ts";
+import { writeJson, readJson } from './utils/file.ts';
+import { getToday } from './utils/date.ts';
 
 const app = new Application();
 const router = new Router();
@@ -18,9 +20,12 @@ router.get("/", async ({ response }) => {
 });
 
 router.get(WEATHER_TODAY, async ({ response }) => {
+  const dbResult = await readJson(`./localDB/weather/${getToday()}.json`);
   try {
     const weatherAPI = new WeatherAPI();
-    response.body = await weatherAPI.getTodayWeather();
+    const result = dbResult || await weatherAPI.getTodayWeather();
+    response.body = result;
+    dbResult || writeJson(`./localDB/weather/${getToday()}.json`, result);
     response.status = 200;
   } catch (error) {
     response.status = 404;
@@ -34,7 +39,7 @@ router.get(WEATHER_TODAY, async ({ response }) => {
 
 router.get('/weather/today/formated', async ({ response }) => {
   try {
-    const weatherInfo = await weatherAPI.getTodayWeather();
+    const weatherInfo = await serverAPI.getTodayWeather();
     const formatData = weatherInfo?.records?.location
       .reduce((previousValue: any[], { locationName, weatherElement }) => {
         const weatherElementLen = weatherElement.length;
