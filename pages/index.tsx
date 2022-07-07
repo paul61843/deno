@@ -6,13 +6,12 @@ const { useState, useEffect } = React;
 
 export class WeatherTemplate extends React.Component {
 
-  weather: Weather = [];
-  currentWeather: WeatherInfo = {};
+  weatherInfo: WeatherInfo = {};
+  currentIndex: number = 0;
 
   constructor(props: { weather: Weather }) {
     super(props);
-    this.weather = props.weather;
-    this.currentWeather = this.weather[0];
+    this.weatherInfo = props.weather[this.currentIndex];
   }
 
   changeBackground(index: number) {
@@ -56,11 +55,11 @@ export class WeatherTemplate extends React.Component {
                 {/* <img src={ sunPng }></img> */}
                 Weather
               </h2>
-              <p>{this.currentWeather?.locationName}</p>
+              <p>{this.weatherInfo?.locationName}</p>
             </header>
             
             <main style={{ display: "flex", color: '#8C8B8B', textAlign: "center" }}>
-              { (this.currentWeather?.weatherElement ? this.currentWeather?.weatherElement : []).map((weatherInfo: any, index: number) => (
+              { (this.weatherInfo?.weatherElement ? this.weatherInfo?.weatherElement : []).map((weatherInfo: any, index: number) => (
                 <section key={index} style={{
                   padding: '2rem', 
                   width: 'calc(100% / 3)', 
