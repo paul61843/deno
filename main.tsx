@@ -20,12 +20,12 @@ router.get("/", async ({ response }) => {
 });
 
 router.get(WEATHER_TODAY, async ({ response }) => {
-  const dbResult = await readJson(`./localDB/weather/${getToday()}.json`);
+  const localData = await readJson(`./localDB/weather/${getToday()}.json`);
   try {
     const weatherAPI = new WeatherAPI();
-    const result = dbResult || await weatherAPI.getTodayWeather();
+    const result = localData || await weatherAPI.getTodayWeather();
     response.body = result;
-    dbResult || writeJson(`./localDB/weather/${getToday()}.json`, result);
+    localData || writeJson(`./localDB/weather/${getToday()}.json`, result);
     response.status = 200;
   } catch (error) {
     response.status = 404;
