@@ -9,7 +9,7 @@ export function writeJson(path: string, data: object): boolean {
 
 export async function readJson(path: string): Promise<String | null> {
     try {
-        const result = await Deno.readTextFile(`./localDB/weather/20220707.json`);
+        const result = await Deno.readTextFile(path);
         return result;
     } catch (error) {
         return null;
