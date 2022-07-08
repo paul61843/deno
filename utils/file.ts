@@ -15,3 +15,21 @@ export async function readJson(path: string): Promise<String | null> {
         return null;
     }
 }
+
+export function makeDirectory(path: string) {
+    try {
+        Deno.mkdirSync(path);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
+
+export function readDirectory(path: string) {
+    try {
+        Deno.readDir(path);
+        return true;
+    } catch (error) {
+        return false;
+    }
+}
