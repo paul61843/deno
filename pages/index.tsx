@@ -7,11 +7,10 @@ const { useState, useEffect } = React;
 export class WeatherTemplate extends React.Component {
 
   weatherInfo: WeatherInfo = {};
-  currentIndex: number = 0;
 
-  constructor(props: { weather: Weather }) {
+  constructor(props: { weather: WeatherInfo }) {
     super(props);
-    this.weatherInfo = props.weather[this.currentIndex];
+    this.weatherInfo = props.weather;
   }
 
   changeBackground(index: number) {

@@ -4,8 +4,9 @@ import { WeatherAPI, ServerAPI } from "./api/api.ts";
 import { React, ReactDOMServer } from "./dep.ts";
 import { App, Index, WeatherTemplate } from "./pages/index.tsx";
 import { WEATHER_TODAY, WEATHER_TODAY_Search } from "./api/common/path.ts";
-import { writeJson, readJson, makeDirectory } from './utils/file.ts';
-import { getToday } from './utils/date.ts';
+import { writeJson, readJson, makeDirectory, getToday, getGPSInfo } from './utils/index.ts';
+import * as client from './controller/client/client.tsx';
+
 
 const app = new Application();
 const router = new Router();
@@ -13,11 +14,7 @@ const router = new Router();
 const weatherAPI = new WeatherAPI();
 const serverAPI = new ServerAPI();
 
-router.get("/", async ({ response }) => {
-  const formatedWeather = await serverAPI.getfomatedTodayWeather();
-  response.type = "text/html";
-  response.body = Index(ReactDOMServer.renderToString(<WeatherTemplate weather={formatedWeather} />));
-});
+router.get("/", client.index);
 
 router.get(WEATHER_TODAY, async ({ response }) => {
   makeDirectory(`./localDB/${getToday()}`);
