@@ -6,8 +6,8 @@ const defaultCity = { latitude: 24.9466, longitude: 121.586 };
 
 export function getNearestCity(GPSInfo) {
   const posititon2 = {
-    latitude: GPSInfo.latitude || defaultCity.latitude,
     longitude: GPSInfo.longitude || defaultCity.longitude,
+    latitude: GPSInfo.latitude || defaultCity.latitude,
   };
   const distances = cities.map((posititon1) =>
     getDistance(posititon1, posititon2)
