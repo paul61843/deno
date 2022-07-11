@@ -1,5 +1,5 @@
-import { cities } from "../constants/GPSPostition.ts";
-import { getDistance } from "../utils/index.ts";
+import { cities } from "@constants/GPSPostition.ts";
+import { getDistance } from "@utils/index.ts";
 
 // 預設位置為台北市
 const defaultCity = { latitude: 24.9466, longitude: 121.586 };

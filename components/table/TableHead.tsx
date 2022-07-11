@@ -1,4 +1,4 @@
-import { React, ReactDOMServer } from "../../dep.ts";
+import { React, ReactDOMServer } from "@/dep.ts";
 import type { HeaderColumn, HeaderProps } from './type.d.ts';
 
 export default (props: HeaderProps) => {

@@ -1,9 +1,5 @@
-import { React, ReactDOMServer } from "../dep.ts";
-import { Weather, WeatherInfo, WeatherItem } from "../types/weather.ts";
-// import sunPng from '../assets/images/sun.png';
-
-const { useState, useEffect } = React;
-
+import { React, ReactDOMServer } from "@/dep.ts";
+import type { Weather, WeatherInfo, WeatherItem } from "@type/weather.ts";
 export class WeatherTemplate extends React.Component {
 
   weatherInfo: WeatherInfo = {};

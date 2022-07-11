@@ -1,0 +1,16 @@
+{
+    "imports": {
+      "@/": "./",
+      "@env/": "./env/",
+      "@api/": "./api/",
+      "@components/": "./components/",
+      "@assets/": "./assets/",
+      "@constants/": "./constants/",
+      "@controller/": "./controller/",
+      "@localDB/": "./localDB/",
+      "@pages/": "./pages/",
+      "@service/": "./service/",
+      "@type/": "./type/",
+      "@utils/": "./utils/"
+    }
+}

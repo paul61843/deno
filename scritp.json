@@ -1,5 +1,0 @@
-{
-    "scripts": {
-      "start": "deno run --watch --allow-net main.tsx"
-    }
-  }

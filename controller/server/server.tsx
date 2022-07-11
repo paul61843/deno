@@ -1,10 +1,10 @@
-import { WeatherAPI, ServerAPI } from "../../api/api.ts";
+import { WeatherAPI, ServerAPI } from "@/api/api.ts";
 import {
   writeJson,
   readJson,
   makeDirectory,
   getToday,
-} from "../../utils/index.ts";
+} from "@utils/index.ts";
 
 const weatherAPI = new WeatherAPI();
 const serverAPI = new ServerAPI();

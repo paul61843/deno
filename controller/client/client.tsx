@@ -1,8 +1,8 @@
-import { Index, WeatherTemplate } from "../../pages/index.tsx";
-import { WeatherAPI, ServerAPI } from "../../api/api.ts";
-import { getGPSInfo } from "../../utils/index.ts";
-import { React, ReactDOMServer } from "../../dep.ts";
-import { getNearestCity } from "../../service/index.ts";
+import { Index, WeatherTemplate } from "@pages/index.tsx";
+import { WeatherAPI, ServerAPI } from "@api/api.ts";
+import { getGPSInfo } from "@utils/index.ts";
+import { React, ReactDOMServer } from "@/dep.ts";
+import { getNearestCity } from "@/service/index.ts";
 
 const serverAPI = new ServerAPI();
 

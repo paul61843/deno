@@ -1,4 +1,4 @@
-import { React, ReactDOMServer } from "../../dep.ts";
+import { React, ReactDOMServer } from "@/dep.ts";
 import TableHead from "./TableHead.tsx";
 import TableBody from "./TableBody.tsx";
 

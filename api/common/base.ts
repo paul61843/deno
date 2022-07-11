@@ -1,4 +1,3 @@
-import { WEATHER_BASE, AUTH_CODE, PORT } from '../../env/index.ts';
 import { GETConfig, POSTConfig } from './config.ts';
 
 export class BaseAPI {
