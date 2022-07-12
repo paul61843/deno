@@ -11,6 +11,7 @@
       "@pages/": "./pages/",
       "@service/": "./service/",
       "@type/": "./type/",
-      "@utils/": "./utils/"
+      "@utils/": "./utils/",
+      "@middleware/": "./middleware/"
     }
 }

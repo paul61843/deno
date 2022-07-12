@@ -3,3 +3,5 @@ export const WEATHER_BASE = "https://opendata.cwb.gov.tw/api";
 
 export const SERVER_BASE = 'http://172.104.121.44';
 export const PORT = 8080;
+
+export const READABLE_FOLDER = ['assets', 'build'];
