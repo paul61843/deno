@@ -1,4 +1,4 @@
-export function writeJson(path: string, data: object): boolean {
+export function writeTextFile(path: string, data: object): boolean {
     try {
         Deno.writeTextFileSync(path, JSON.stringify(data));
         return true;
@@ -7,7 +7,7 @@ export function writeJson(path: string, data: object): boolean {
     }
 }
 
-export async function readJson(path: string): Promise<String | null> {
+export async function readTextFile(path: string): Promise<String | null> {
     try {
         const result = await Deno.readTextFile(path);
         return result;

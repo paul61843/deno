@@ -1,7 +1,7 @@
 import { WeatherAPI, ServerAPI } from "@/api/api.ts";
 import {
-  writeJson,
-  readJson,
+  writeTextFile,
+  readTextFile,
   makeDirectory,
   getToday,
 } from "@utils/index.ts";
@@ -11,12 +11,12 @@ const serverAPI = new ServerAPI();
 
 export async function weatherToday({ response }) {
   makeDirectory(`./localDB/${getToday()}`);
-  const localData = await readJson(`./localDB/${getToday()}/weather.json`);
+  const localData = await readTextFile(`./localDB/${getToday()}/weather.json`);
   try {
     const weatherAPI = new WeatherAPI();
     const result = localData || (await weatherAPI.getTodayWeather());
     response.body = result;
-    localData || writeJson(`./localDB/${getToday()}/weather.json`, result);
+    localData || writeTextFile(`./localDB/${getToday()}/weather.json`, result);
     response.status = 200;
   } catch (error) {
     response.status = 404;
