@@ -20,7 +20,7 @@ Homebrew (Mac):
 ## 啟動
 
 電腦有安裝 bash 的話，可以執行寫好的 sh 檔執行
-> bash run.sh
+> bash app.sh
 
 沒有安裝 bash，也可以用原生語法
 > deno run --allow-net --allow-write --allow-read --allow-env --watch main.tsx
