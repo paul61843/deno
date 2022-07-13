@@ -33,40 +33,47 @@ export class WeatherTemplate extends React.Component {
           background: '#f7d9a3', 
           width: '100vw', 
           height: '100vh', 
-          display: 'flex', 
-          justifyContent: "center",
-          alignItems: "center",
+          position: "relative",
         }}>
-
-          <div style={{ width: '450px', background: '#ffffff', borderRadius: "20px" }}>
-            <header style={{ 
-              display: "flex",
-              alignItems: 'center',
-              justifyContent: 'space-between',
-              borderBottom: '3px solid #D4D4D4', 
-              padding: '.5rem 1.5rem',
-            }}>
-              <div style={{ display: 'flex', fontWeight: 'normal', alignItems: 'center' }}>
-                <img src="./assets/images/sun.png" style={{ width: "25px", height: "25px" }}></img>
-                <h2 style={{ fontSize: "1.2rem", marginLeft: ".5rem" }}>Weather</h2>
-              </div>
-              <p>{this.weatherInfo?.locationName}</p>
+          <div style={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+          }}>
+            <header>
+              <h1 style={{ textAlign: "center", padding: "2.5rem" }}>Simple Weather</h1>
             </header>
-            
-            <main style={{ display: "flex", color: '#8C8B8B', textAlign: "center" }}>
-              { (this.weatherInfo?.weatherElement ? this.weatherInfo?.weatherElement : []).map((weatherInfo: any, index: number) => (
-                <section key={index} style={{
-                  padding: '2rem', 
-                  width: 'calc(100% / 3)', 
-                  ...this.changeBackground(index),
-                }}>
-                  <h4>{weatherInfo.CIName}</h4>
-                  <p style={{ color: 'black', fontWeight: 'bold' }}>{ weatherInfo.MaxTName + weatherInfo.MaxTUnit } / { weatherInfo.MinTName + weatherInfo.MinTUnit }</p>
-                  <p>{ this.formatDateTime(weatherInfo.startTime).date }</p>
-                  <p>{ this.formatDateTime(weatherInfo.startTime).time }</p>
-                  <p>降雨 { weatherInfo.PoPName } %</p>
-                </section>
-              ))}
+            <main style={{ width: '450px', background: '#ffffff', borderRadius: "20px" }}>
+              <header style={{ 
+                display: "flex",
+                alignItems: 'center',
+                justifyContent: 'space-between',
+                borderBottom: '3px solid #D4D4D4', 
+                padding: '.5rem 1.5rem',
+              }}>
+                <div style={{ display: 'flex', fontWeight: 'normal', alignItems: 'center' }}>
+                  <img src="./assets/images/sun.png" style={{ width: "25px", height: "25px" }}></img>
+                  <h2 style={{ fontSize: "1.2rem", marginLeft: ".5rem" }}>Weather</h2>
+                </div>
+                <p>{this.weatherInfo?.locationName}</p>
+              </header>
+              
+              <div style={{ display: "flex", color: '#8C8B8B', textAlign: "center" }}>
+                { (this.weatherInfo?.weatherElement ? this.weatherInfo?.weatherElement : []).map((weatherInfo: any, index: number) => (
+                  <section key={index} style={{
+                    padding: '2rem', 
+                    width: 'calc(100% / 3)', 
+                    ...this.changeBackground(index),
+                  }}>
+                    <h4>{weatherInfo.CIName}</h4>
+                    <p style={{ color: 'black', fontWeight: 'bold' }}>{ weatherInfo.MaxTName + weatherInfo.MaxTUnit } / { weatherInfo.MinTName + weatherInfo.MinTUnit }</p>
+                    <p>{ this.formatDateTime(weatherInfo.startTime).date }</p>
+                    <p>{ this.formatDateTime(weatherInfo.startTime).time }</p>
+                    <p>降雨 { weatherInfo.PoPName } %</p>
+                  </section>
+                ))}
+              </div>
             </main>
           </div>
         </div>
