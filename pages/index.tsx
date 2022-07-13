@@ -46,10 +46,10 @@ export class WeatherTemplate extends React.Component {
               borderBottom: '3px solid #D4D4D4', 
               padding: '.5rem 1.5rem',
             }}>
-              <h2 style={{ fontWeight: 'normal' }}>
-                {/* <img src={ sunPng }></img> */}
-                Weather
-              </h2>
+              <div style={{ display: 'flex', fontWeight: 'normal', alignItems: 'center' }}>
+                <img src="./assets/images/sun.png" style={{ width: "25px", height: "25px" }}></img>
+                <h2 style={{ fontSize: "1.2rem", marginLeft: ".5rem" }}>Weather</h2>
+              </div>
               <p>{this.weatherInfo?.locationName}</p>
             </header>
             
