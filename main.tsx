@@ -23,5 +23,8 @@ app.use(middleware.allowedReadFile);
 app.use(router.routes());
 app.use(router.allowedMethods());
 
-console.log("listen", PORT);
-await app.listen({ port: PORT });
+try {
+    await app.listen({ port: PORT });
+} catch (error) {
+    console.log('error', error)
+}

@@ -1,4 +1,4 @@
-import { React, ReactDOMServer } from "@/dep.ts";
+import { React, ReactDOMServer, Twind, TwindSheets } from "@/dep.ts";
 import type { Weather, WeatherInfo, WeatherItem } from "@type/weather.ts";
 export class WeatherTemplate extends React.Component {
 
@@ -27,50 +27,40 @@ export class WeatherTemplate extends React.Component {
   }
 
   render() {
+    const { tw } = Twind;
+
     return (
       <>
-        <div style={{ 
+        <div className={tw`w-screen h-screen relative`} style={{ 
           background: '#f7d9a3', 
-          width: '100vw', 
-          height: '100vh', 
-          position: "relative",
         }}>
-          <div style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-          }}>
+          <div className={tw`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}>
             <header>
-              <h1 style={{ textAlign: "center", padding: "2.5rem" }}>Simple Weather</h1>
+              <h1 className={tw`text-3xl text-center font-bold p-10`}>Simple Weather</h1>
             </header>
-            <main style={{ width: '450px', background: '#ffffff', borderRadius: "20px" }}>
-              <header style={{ 
-                display: "flex",
-                alignItems: 'center',
-                justifyContent: 'space-between',
+            <main className={ tw`rounded-2xl` } style={{ minWidth: '450px', background: '#ffffff' }}>
+              <header className={tw`flex items-center justify-between px-6 py-4`} style={{ 
                 borderBottom: '3px solid #D4D4D4', 
-                padding: '.5rem 1.5rem',
               }}>
-                <div style={{ display: 'flex', fontWeight: 'normal', alignItems: 'center' }}>
-                  <img src="./assets/images/sun.png" style={{ width: "25px", height: "25px" }}></img>
-                  <h2 style={{ fontSize: "1.2rem", marginLeft: ".5rem" }}>Weather</h2>
+                <div className={ tw`flex font-normal items-center` } >
+                  <img className={ tw`w-6 h-6` } src="./assets/images/sun.png"></img>
+                  <h2 className={ tw`text-lg ml-2 font-bold` }>Weather</h2>
                 </div>
                 <p>{this.weatherInfo?.locationName}</p>
               </header>
               
-              <div style={{ display: "flex", color: '#8C8B8B', textAlign: "center" }}>
+              <div className={ tw`flex text-center`} style={{ color: '#8C8B8B' }}>
                 { (this.weatherInfo?.weatherElement ? this.weatherInfo?.weatherElement : []).map((weatherInfo: any, index: number) => (
                   <section key={index} style={{
                     padding: '2rem', 
                     width: 'calc(100% / 3)', 
                     ...this.changeBackground(index),
                   }}>
-                    <h4>{weatherInfo.CIName}</h4>
-                    <p style={{ color: 'black', fontWeight: 'bold' }}>{ weatherInfo.MaxTName + weatherInfo.MaxTUnit } / { weatherInfo.MinTName + weatherInfo.MinTUnit }</p>
-                    <p>{ this.formatDateTime(weatherInfo.startTime).date }</p>
-                    <p>{ this.formatDateTime(weatherInfo.startTime).time }</p>
-                    <p>降雨 { weatherInfo.PoPName } %</p>
+                    <h4 className={ tw`py-1` }>{weatherInfo.CIName}</h4>
+                    <p className={ tw`py-1 text-black font-bold` }>{ weatherInfo.MaxTName + weatherInfo.MaxTUnit } / { weatherInfo.MinTName + weatherInfo.MinTUnit }</p>
+                    <p className={ tw`py-1` }>{ this.formatDateTime(weatherInfo.startTime).date }</p>
+                    <p className={ tw`py-1` }>{ this.formatDateTime(weatherInfo.startTime).time }</p>
+                    <p className={ tw`py-1` }>降雨 { weatherInfo.PoPName } %</p>
                   </section>
                 ))}
               </div>
@@ -81,36 +71,3 @@ export class WeatherTemplate extends React.Component {
     );
   }
 }
-
-export const Index = (appHtml: string) => {
-  return `
-    <!DOCTYPE html>
-      <html lang="en">
-      <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-      </head>
-      <style>
-        * {
-          box-sizing: border-box;
-          font-family: 微軟正黑體;
-        }
-        html, body {
-          padding: 0;
-          margin: 0;
-        }
-        h1, h2, h3, h4, h5 {
-          margin: 0;
-        }
-        
-      </style>
-      <body>
-        ${appHtml}
-      </body>
-    </html>
-  `;
-};
-
-
