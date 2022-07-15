@@ -59,7 +59,7 @@ export class WeatherTemplate extends React.Component {
                     <h4 className={ tw`py-1` }>{weatherInfo.CIName}</h4>
                     <p className={ tw`py-1 text-black font-bold` }>{ weatherInfo.MaxTName + weatherInfo.MaxTUnit } / { weatherInfo.MinTName + weatherInfo.MinTUnit }</p>
                     <p className={ tw`py-1` }>{ this.formatDateTime(weatherInfo.startTime).date }</p>
-                    <p className={ tw`py-1` }>{ this.formatDateTime(weatherInfo.startTime).time }</p>
+                    <p className={ tw`py-1` }>{ this.formatDateTime(weatherInfo.startTime).time } 時</p>
                     <p className={ tw`py-1` }>降雨 { weatherInfo.PoPName } %</p>
                   </section>
                 ))}
