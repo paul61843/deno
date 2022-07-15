@@ -1,2 +1,1 @@
-#!/bin/bash
 deno run --allow-net --allow-write --allow-read --allow-env --watch main.tsx
