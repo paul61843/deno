@@ -1,4 +1,4 @@
-import { WeatherAPI, ServerAPI } from "@/api/api.ts";
+import { WeatherAPI, ServerAPI, DatabaseAPI } from "@/api/api.ts";
 import {
   writeTextFile,
   readTextFile,
@@ -8,6 +8,7 @@ import {
 
 const weatherAPI = new WeatherAPI();
 const serverAPI = new ServerAPI();
+const databaseAPI = new DatabaseAPI();
 
 export async function weatherToday({ response }) {
   makeDirectory(`./localDB/${getToday()}`);
