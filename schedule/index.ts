@@ -1,13 +1,10 @@
-import {
-  cron,
-  everyMinute,
-} from "https://deno.land/x/deno_cron@v1.0.0/cron.ts";
-
 import { WeatherAPI } from "@api/api.ts";
 
 const weatherApi = new WeatherAPI();
 
 export const start = () => {
-  //   everyMinute(() => {
-  //   });
+  // 每 6 小時取得天氣資料
+  setTimeout(() => {
+    weatherApi.getTodayWeather();
+  }, 6 * 60 * 60);
 };
