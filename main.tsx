@@ -3,10 +3,14 @@ import { PORT } from "@env/index.ts";
 import { WEATHER_TODAY, WEATHER_TODAY_Search } from "@api/common/path.ts";
 import * as client from "@controller/client/client.tsx";
 import * as server from "@controller/server/server.tsx";
-import * as middleware from '@middleware/index.ts';
+import * as middleware from "@middleware/index.ts";
+import * as schedule from "@schedule/index.ts";
 
 const app = new Application();
 const router = new Router();
+
+// schdeule
+schedule.start();
 
 // api router
 router.get(WEATHER_TODAY, server.weatherToday);
@@ -24,7 +28,7 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 try {
-    await app.listen({ port: PORT });
+  await app.listen({ port: PORT });
 } catch (error) {
-    console.log('error', error)
+  console.log("error", error);
 }
