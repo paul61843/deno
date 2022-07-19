@@ -13,6 +13,6 @@
     "@type/": "./type/",
     "@utils/": "./utils/",
     "@middleware/": "./middleware/",
-    "@schedule/": "./schedule/"
+    "@scheduling/": "./scheduling/"
   }
 }

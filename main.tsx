@@ -4,7 +4,7 @@ import { WEATHER_TODAY, WEATHER_TODAY_Search } from "@api/common/path.ts";
 import * as client from "@controller/client/client.tsx";
 import * as server from "@controller/server/server.tsx";
 import * as middleware from "@middleware/index.ts";
-import * as schedule from "@schedule/index.ts";
+import * as schedule from "@scheduling/index.ts";
 
 const app = new Application();
 const router = new Router();
