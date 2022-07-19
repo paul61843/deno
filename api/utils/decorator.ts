@@ -1,15 +1,15 @@
 import {
-  WEATHER_BASE,
-  AUTH_CODE,
-  SERVER_BASE,
+  WEATHER_API_BASE,
+  WEATHER_API_TOKEN,
+  LOCAL_API_BASE,
   DATABASE_BASE,
   PORT,
 } from "@env/index.ts";
 import { BaseAPI } from "../common/base.ts";
 import { dataBasePostConfig } from "../common/config.ts";
 
-const weatherAPI = new BaseAPI(WEATHER_BASE);
-const serverAPI = new BaseAPI(`${SERVER_BASE}:${PORT}`);
+const weatherAPI = new BaseAPI(WEATHER_API_BASE);
+const serverAPI = new BaseAPI(`${LOCAL_API_BASE}:${PORT}`);
 const dataBaseAPI = new BaseAPI(`${DATABASE_BASE}`);
 
 export const weatherGET = (apiPath: string) => {
@@ -17,7 +17,7 @@ export const weatherGET = (apiPath: string) => {
     descriptor.value = async () => {
       const response = await weatherAPI.GET(
         apiPath,
-        `/?Authorization=${AUTH_CODE}`
+        `/?Authorization=${WEATHER_API_TOKEN}`
       );
       return await response.json();
     };
