@@ -46,7 +46,7 @@ export class WeatherTemplate extends React.Component {
             </header>
             <main
               className={tw`rounded-2xl`}
-              style={{ minWidth: "450px", background: "#ffffff" }}
+              style={{ minWidth: "350px", background: "#ffffff" }}
             >
               <header
                 className={tw`flex items-center justify-between px-6 py-4`}
