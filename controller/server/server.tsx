@@ -12,7 +12,12 @@ const databaseAPI = new DatabaseAPI();
 
 export async function weatherToday({ response }) {
   makeDirectory(`./localDB/${getToday()}`);
-  const localData = await readTextFile(`./localDB/${getToday()}/weather.json`);
+  let localData;
+  try {
+    localData = await readTextFile(`./localDB/${getToday()}/weather.json`);
+  } catch (error) {
+    console.log(error)
+  }
   try {
     const weatherAPI = new WeatherAPI();
     const result = localData || (await weatherAPI.getTodayWeather());
