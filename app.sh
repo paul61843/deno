@@ -1,3 +1,3 @@
-port=${1:-8080}
+port=${1:-5000}
 
-deno run --allow-net --allow-write --allow-read --allow-env --watch main.tsx --port=$port
+denon run --allow-net --allow-write --allow-read --allow-env --watch main.tsx --port=$port
