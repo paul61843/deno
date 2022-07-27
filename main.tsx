@@ -20,13 +20,17 @@ router.get(WEATHER_TODAY_Search, server.weatherSearch);
 // client router
 router.get("/", client.index);
 
+router.get("/(.*)", async (context) => {
+  context.response.status = 404;
+  context.response.body = "404 | Page not Found";
+});
+
 // middleware
 app.use(middleware.allowedReadFile);
 
 // router
 app.use(router.routes());
 app.use(router.allowedMethods());
-
 
 try {
   console.log(`listen ${PORT}`);
