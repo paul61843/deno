@@ -1,4 +1,4 @@
-import { Index, WeatherTemplate } from "@pages/index.tsx";
+import { WeatherTemplate } from "@pages/index.tsx";
 import { WeatherAPI, ServerAPI } from "@api/api.ts";
 import { getGPSInfo } from "@utils/index.ts";
 import { React, ReactDOMServer, Twind, TwindSheets } from "@/dep.ts";
@@ -10,19 +10,24 @@ Twind.setup({ sheet });
 
 const serverAPI = new ServerAPI();
 
-export async function index({ request, response }) {
+type Context = {
+  request: any;
+  response: any;
+};
+
+export async function index({ request, response }: Context) {
   try {
     const formatedWeather = await serverAPI.getfomatedTodayWeather();
     const GPSInfo = await getGPSInfo(request.ip);
     const nearestCity = getNearestCity(GPSInfo);
     const currentWeather = formatedWeather.find(
-      (item) => item.locationName === nearestCity
+      (item: any) => item.locationName === nearestCity
     );
 
     sheet.reset();
     const body = ReactDOMServer.renderToString(
       <WeatherTemplate weather={currentWeather} />
-      )
+    );
     const styleTag = TwindSheets.getStyleTag(sheet);
 
     response.type = "text/html";
@@ -53,7 +58,7 @@ export async function index({ request, response }) {
       <body>
         ${body}
       </body>
-    </html>`
+    </html>`;
   } catch (error) {
     response.body = "error";
   }
