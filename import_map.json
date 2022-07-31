@@ -13,6 +13,7 @@
     "@type/": "./type/",
     "@utils/": "./utils/",
     "@middleware/": "./middleware/",
-    "@scheduling/": "./scheduling/"
+    "@scheduling/": "./scheduling/",
+    "@layout/": "./layout/"
   }
 }
