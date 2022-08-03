@@ -4,7 +4,7 @@ type Props = {
   cityName: string;
 };
 
-export class CardHeader extends React.Component<Props> {
+export default class CardHeader extends React.Component<Props> {
   readonly twind = Twind;
 
   private cityName: string;

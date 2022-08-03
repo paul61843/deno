@@ -5,11 +5,11 @@ type Props = {
   index: number;
 };
 
-export class Info extends React.Component<Props> {
-  twind = Twind;
+export default class Info extends React.Component<Props> {
+  readonly twind = Twind;
 
-  weatherInfo: any;
-  index: number;
+  private weatherInfo: any;
+  private index: number;
 
   constructor(props: Props) {
     super(props);

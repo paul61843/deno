@@ -1,7 +1,7 @@
-import { React, ReactDOMServer, Twind, TwindSheets } from "@/dep.ts";
-import type { Weather, WeatherInfo, WeatherItem } from "@type/weather.ts";
-import { CardHeader } from "@components/weather/CardHeader.tsx";
-import { Info } from "@/components/weather/Info.tsx";
+import { React } from "@/dep.ts";
+import type { WeatherInfo } from "@type/weather.ts";
+import CardHeader from "@components/weather/CardHeader.tsx";
+import CardContent from "@/components/weather/CardContent.tsx";
 import BaseLayout from "@layout/Base.tsx";
 
 type Props = {
@@ -17,20 +17,11 @@ export class WeatherTemplate extends React.Component<Props> {
   }
 
   render(): React.ReactNode {
-    const { tw } = Twind;
-
     return (
       <>
         <BaseLayout>
           <CardHeader cityName={this.weatherInfo?.locationName || ""} />
-          <div className={tw`flex text-center`} style={{ color: "#8C8B8B" }}>
-            {(this.weatherInfo?.weatherElement
-              ? this.weatherInfo?.weatherElement
-              : []
-            ).map((weatherInfo: any, index: number) => (
-              <Info weatherInfo={weatherInfo} index={index} />
-            ))}
-          </div>
+          <CardContent weatherElement={this.weatherInfo?.weatherElement || []} />
         </BaseLayout>
       </>
     );
