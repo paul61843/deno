@@ -20,8 +20,8 @@ export class WeatherTemplate extends React.Component<Props> {
     return (
       <>
         <BaseLayout>
-          <CardHeader cityName={this.weatherInfo?.locationName || ""} />
-          <CardContent weatherElement={this.weatherInfo?.weatherElement || []} />
+          <CardHeader cityName={this.weatherInfo?.locationName} />
+          <CardContent weatherElement={this.weatherInfo?.weatherElement} />
         </BaseLayout>
       </>
     );

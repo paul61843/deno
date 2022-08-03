@@ -1,7 +1,7 @@
-import { React, Twind,  } from "@/dep.ts";
+import { React, Twind } from "@/dep.ts";
 
 type Props = {
-  cityName: string;
+  cityName: string | undefined;
 };
 
 export default class CardHeader extends React.Component<Props> {
@@ -11,7 +11,7 @@ export default class CardHeader extends React.Component<Props> {
 
   constructor(props: Props) {
     super(props);
-    this.cityName = props.cityName;
+    this.cityName = props.cityName ?? "";
   }
 
   render(): React.ReactNode {
