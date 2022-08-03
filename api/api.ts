@@ -2,6 +2,7 @@ import {
   WEATHER_FORECAST_THREE,
   WEATHER_FORECAST_TAPIPEI_WEEK,
   WEATHER_TODAY,
+  WEATHER_TODAY_FORMATED,
   DATABASE_FIND_ONE,
   DATABASE_INSERT_ONE,
   DATABASE_DELETE_ONE,
@@ -24,7 +25,7 @@ export class ServerAPI {
   @serverGET(WEATHER_TODAY)
   async getTodayWeather(): Promise<any> {}
 
-  @serverGET("/weather/today/formated")
+  @serverGET(WEATHER_TODAY_FORMATED)
   async getfomatedTodayWeather(): Promise<any> {}
 }
 
