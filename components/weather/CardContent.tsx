@@ -22,7 +22,7 @@ export default class CardContent extends React.Component<Props> {
     return (
       <div className={tw`flex text-center`} style={{ color: "#8C8B8B" }}>
         {this.weatherElement.map((weatherInfo: any, index: number) => (
-          <Info weatherInfo={weatherInfo} index={index} />
+          <Info key={index} weatherInfo={weatherInfo} index={index} />
         ))}
       </div>
     );
