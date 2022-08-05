@@ -15,6 +15,17 @@ type Context = {
   response: any;
 };
 
+// <!-- Google tag (gtag.js) -->
+const GAScript = `
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-155Q6212Z8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-155Q6212Z8');
+  </script>
+`
+
 export async function index({ request, response }: Context) {
   try {
     const formatedWeather = await serverAPI.getfomatedTodayWeather();
@@ -38,17 +49,9 @@ export async function index({ request, response }: Context) {
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Weather</title>
+        ${GAScript}
         ${styleTag}
-        <!-- Google tag (gtag.js) -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-155Q6212Z8"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-155Q6212Z8');
-        </script>
       </head>
       <style>
         * {
