@@ -1,5 +1,6 @@
 import { React, Twind } from "@/dep.ts";
 import Header from "./Header.tsx";
+import NavBar from "@components/Navbar.tsx";
 
 type Props = {
   children: React.ReactNode;
@@ -19,6 +20,7 @@ export default class BasicLayout extends React.Component<Props> {
           background: "#f7d9a3",
         }}
       >
+        <NavBar />
         <div
           className={tw`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`}
         >
