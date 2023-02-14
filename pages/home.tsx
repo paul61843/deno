@@ -8,7 +8,7 @@ type Props = {
   weather: WeatherInfo;
 };
 
-export class WeatherTemplate extends React.Component<Props> {
+export class HomeTemplate extends React.Component<Props> {
   weatherInfo: WeatherInfo = {};
 
   constructor(props: Props) {
